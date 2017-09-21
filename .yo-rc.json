@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Vinicius Patrinhani @ CI&T",
+      "authorEmail": "patrinhani@ciandt.com",
+      "authorUrl": "http://www.ciandt.com"
+    }
+  }
+}

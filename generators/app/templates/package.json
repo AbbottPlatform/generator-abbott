@@ -1,0 +1,21 @@
+{
+  "name": "<%= props.appNameId %>",
+  "version": "1.0.0",
+  "description": "<%= props.appDescription %>",
+  "main": "app.js",
+  "engines": {
+    "node": ">=7.10.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "abbott"
+  ],
+  "author": "<%= props.projectAuthor %>",<% if (props.projectLicence !== 'nolicense') { %>
+  "license": "<%= props.projectLicence %>",<% } %>
+  "dependencies": {
+    "@abbott-platform/abbott-framework": "^1.6.0"
+  }
+}
