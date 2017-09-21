@@ -7,8 +7,8 @@ var abbottConfig = {
   botName: '<%= props.appNameId %>',
   botFirendlyName: '<%= settings.botFriendlyName %>',
   port: process.env.PORT || 3000,
-  platforms: require('config/platforms'),
-  nlp: require('config/nlp')
+  platforms: require('./config/platforms'),
+  nlp: require('./config/nlp')
 };
   
 const abbottFramework = new AbbottFramework(abbottConfig);

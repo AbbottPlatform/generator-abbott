@@ -16,6 +16,7 @@
   "author": "<%= props.projectAuthor %>",<% if (props.projectLicence !== 'nolicense') { %>
   "license": "<%= props.projectLicence %>",<% } %>
   "dependencies": {
-    "@abbott-platform/abbott-framework": "^1.6.0"
+    "@abbott-platform/abbott-framework": "^1.6.0",
+    "node-env-file": "^0.1.8"
   }
 }
