@@ -5,16 +5,17 @@ const yosay = require('yosay');
 const mkdirp = require('mkdirp');
 
 module.exports = class extends GeneratorBase {
-  constructor(args, opts) {
+  // eslint-disable-next-line no-useless-constructor
+  constructor (args, opts) {
     super(args, opts);
   }
 
-  prompting() {
+  prompting () {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the ' + chalk.green('Abbott - Intent Handler') + ' generator!'
     ));
-    
+
     const prompts = [
       {
         type: 'input',
@@ -37,7 +38,7 @@ module.exports = class extends GeneratorBase {
       }));
   }
 
-  writing() {
+  writing () {
     let destPath = this.destinationPath('intentHandlers');
 
     if (!this.fs.exists(destPath)) {
@@ -46,7 +47,7 @@ module.exports = class extends GeneratorBase {
 
     this.fs.copyTpl(
       this.templatePath('_intent-handler.js'),
-      this.destinationPath(`intentHandlers/${this.props.handlerName}.js`), 
+      this.destinationPath(`intentHandlers/${this.props.handlerName}.js`),
       {
         props: this.props
       }

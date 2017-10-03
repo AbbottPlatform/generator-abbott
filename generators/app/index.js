@@ -4,13 +4,15 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends GeneratorBase {
-  constructor(args, opts) {
+  constructor (args, opts) {
     super(args, opts);
 
     this.props = { };
     this.settings = {};
     this.settings.answers = { };
 
+    /*eslint-disable */
+    
     this.settings.config = { };
 
     this.settings.config.nlp = { };
@@ -18,7 +20,7 @@ module.exports = class extends GeneratorBase {
     this.settings.config.nlp.apiai = {
       token: '[YOUR_API.AI_DEVELOPER_TOKEN]'
     };
-    
+
     this.settings.config.platforms = { };
 
     this.settings.config.platforms.abbott = {};
@@ -26,7 +28,8 @@ module.exports = class extends GeneratorBase {
     this.settings.config.platforms.gactions = {
       projectId: '[ACTIONS_GOOGLE_PROJECT_ID]'
     };
-    
+
+       
     this.settings.config.platforms.gchats = {
       verify_token: '[YOUR_ABBOTT_VERIFY_TOKEN]',
       chats_regex: '[GOOGLE_CHATS_REGEX]'
@@ -39,18 +42,20 @@ module.exports = class extends GeneratorBase {
 
     this.settings.config.platforms.facebook = {
       access_token: '[YOUR_FACEBOOK_ACCESS_TOKEN]',
-      verify_token: '[YOUR_FACEBOOK_VERIFY_TOKEN]', 
+      verify_token: '[YOUR_FACEBOOK_VERIFY_TOKEN]',
       app_secret: '[YOUR_FACEBOOK_APP_SECRET]',
-      validate_requests: true, // Refuse any requests that don't come from FB on your receive webhook
+      validate_requests: true // Refuse any requests that don't come from FB on your receive webhook
     };
+
+    /* eslint-enable */
   }
 
-  prompting() {
+  prompting () {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the ' + chalk.green('abbott') + ' generator!'
     ));
-    
+
     const licenses = [
       {name: 'No License (Copyrighted)', value: 'nolicense'},
       {name: 'Unlicense', value: 'unlicense'},
@@ -66,15 +71,15 @@ module.exports = class extends GeneratorBase {
     ];
 
     const availableNlpProviders = [
-      { name: 'Google - API.AI', value: 'apiai' }
+      {name: 'Google - API.AI', value: 'apiai'}
     ];
 
     const availableChatPlatforms = [
-      { name: 'Abbott', value: 'abbott' },
-      { name: 'Actions on Google (Google Home, Google Assistant, etc.)', value: 'gactions' },
-      { name: 'Google Hangouts Chat', value: 'gchats' },
-      { name: 'Slack', value: 'slack' },
-      { name: 'Facebook Messenger', value: 'facebook' }
+      {name: 'Abbott', value: 'abbott'},
+      {name: 'Actions on Google (Google Home, Google Assistant, etc.)', value: 'gactions'},
+      {name: 'Google Hangouts Chat', value: 'gchats'},
+      {name: 'Slack', value: 'slack'},
+      {name: 'Facebook Messenger', value: 'facebook'}
     ];
 
     const prompts = [
@@ -131,7 +136,7 @@ module.exports = class extends GeneratorBase {
         type: 'checkbox',
         name: 'chatPlatforms',
         message: 'Which chat platform do you want to use?',
-        default: [ 'abbott' ],
+        default: ['abbott'],
         when: !this.settings.chatPlatforms || availableChatPlatforms.find(x => x.value === this.settings.chatPlatforms) === undefined,
         choices: availableChatPlatforms,
         store: true
@@ -147,21 +152,24 @@ module.exports = class extends GeneratorBase {
         this.log('');
         this.log('App Settings:');
         this.log('');
-        
+
         return this.prompt(projectSettingsPrompts).then(answers => {
           // To access props later use this.props.someAnswer;
           this.settings.answers = answers;
           return answers;
         }).then(() => {
-          if ((!this.settings.answers) || (this.settings.answers.length <= 0)) return Promise.resolve();
+          if ((!this.settings.answers) || (this.settings.answers.length <= 0)) {
+            return Promise.resolve();
+          }
 
           let platformPromises = [];
 
           this.log('');
           this.log('App Platform Settings:');
           this.log('');
-          
-          this.settings.answers.chatPlatforms.forEach((item) => {
+
+          /*eslint-disable */
+          this.settings.answers.chatPlatforms.forEach(item => {
             let promptsPlatformSettings = this._createPlatformSettingsPrompts(item);
 
             if ((promptsPlatformSettings) && (promptsPlatformSettings.length > 0)) {
@@ -171,35 +179,36 @@ module.exports = class extends GeneratorBase {
                     this.log('');
                     this.log(`Settings for ${item}:`);
                     this.log('');
-                    
+
                     this.prompt(promptsPlatformSettings).then(platAnswers => {
                       // To access props later use this.props.someAnswer;
                       for (var key in platAnswers) {
                         if (platAnswers.hasOwnProperty(key)) {
-                          let key_name = key.replace('_platform_','').replace(`_${item}_`, '');
+                          let key_name = key.replace('_platform_', '').replace(`_${item}_`, '');
                           this.settings.config.platforms[item][key_name] = platAnswers[key];
                         }
                       }
                     })
-                    .then(resolve)
-                    .catch(reject);
-                  });  
+                      .then(resolve)
+                      .catch(reject);
+                  });
                 }
               );
             }
-          });          
+          });
+          /* eslint-enable */
 
           return this._createPromiseChain(platformPromises);
         });
       });
   }
 
-  _createPlatformSettingsPrompts(platformKey) {
+  _createPlatformSettingsPrompts (platformKey) {
     let platformSettings = [];
 
     if (platformKey in this.settings.config.platforms) {
       for (var key in this.settings.config.platforms[platformKey]) {
-        if (this.settings.config.platforms[platformKey].hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(this.settings.config.platforms[platformKey], key)) {
           platformSettings.push({
             type: 'input',
             name: `_platform__${platformKey}_${key}`,
@@ -214,7 +223,7 @@ module.exports = class extends GeneratorBase {
     return platformSettings;
   }
 
-  writing() {
+  writing () {
     this.fs.copyTpl(
       [
         this.templatePath() + '/**',
@@ -227,7 +236,7 @@ module.exports = class extends GeneratorBase {
     );
   }
 
-  install() {
+  install () {
     this.npmInstall();
   }
 };
