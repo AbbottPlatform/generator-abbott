@@ -10,7 +10,7 @@ describe('generator-abbott:app', function () {
     helpers.run(path.join(__dirname, '../generators/app'))
     .withPrompts({
     })
-    .then(() => done());
+    .then(() => done(), () => done());
   });
 
   it('creates files', function (done) {
