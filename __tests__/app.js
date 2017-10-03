@@ -6,16 +6,17 @@ var helpers = require('yeoman-test');
 describe('generator-abbott:app', function () {
   this.timeout(15000);
 
-  beforeEach((done) => {
+  beforeEach(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
     .withPrompts({
     })
     .then(() => done());
   });
 
-  it('creates files', () => {
+  it('creates files', function (done) {
     assert.file([
       'package.json'
-    ]);
+    ])
+    .then(() => done());
   });
 });
