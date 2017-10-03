@@ -4,12 +4,11 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('generator-abbott:app', function () {
-  this.timeout(60000);
+  this.timeout(15000);
 
   beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/app'))
-    .withPrompts({
-    });
+    .withPrompts({});
   });
 
   it('creates files', function () {
