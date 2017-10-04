@@ -1,4 +1,7 @@
 # generator-abbott [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+
+[![Ebert][ebertapp-image]][ebertapp-url]
+
 >Yeoman Generator for the Abbott Platform
 
 ## Installation
@@ -39,3 +42,5 @@ MIT © [Vinicius Patrinhani @ CI&amp;T](http://www.ciandt.com)
 [daviddm-url]: https://david-dm.org/AbbottPlatform/generator-abbott
 [coveralls-image]: https://coveralls.io/repos/AbbottPlatform/generator-abbott/badge.svg
 [coveralls-url]: https://coveralls.io/r/AbbottPlatform/generator-abbott
+[ebertapp-image]: https://ebertapp.io/github/AbbottPlatform/generator-abbott.svg
+[ebertapp-url]: https://ebertapp.io/github/AbbottPlatform/generator-abbott
