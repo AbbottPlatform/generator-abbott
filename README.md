@@ -1,4 +1,11 @@
-# generator-abbott [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-abbott 
+
+[![Coverage percentage][coveralls-image]][coveralls-url]
+[![Build Status][travis-image]][travis-url] 
+
+[![NPM version][npm-image]][npm-url] 
+[![Dependency Status][daviddm-image]][daviddm-url] 
+
 >Yeoman Generator for the Abbott Platform
 
 ## Installation
